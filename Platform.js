@@ -6,14 +6,14 @@ function Platform(x, y, w, h) {
 		if(player.pos.x + 15 > this.pos.x &&
 		   player.pos.x + 15 < this.pos.x + (this.size.x / 2) &&
 		   player.pos.y + 15 > this.pos.y + player.vel.y &&
-		   player.pos.y - 15 < this.pos.y + this.size.y) {
+		   player.pos.y - 15 < this.pos.y + this.size.y + player.vel.y - 1) {
 			player.vel.x = 0;
 			player.pos.x = this.pos.x - 15;
 		}
-		if(player.pos.x - 15 > this.pos.x + this.size.x - (this.size.x / 2) &&
+		if(player.pos.x - 15 > this.pos.x + (this.size.x / 2) &&
 		   player.pos.x - 15 < this.pos.x + this.size.x &&
 		   player.pos.y + 15 > this.pos.y + player.vel.y &&
-		   player.pos.y - 15 < this.pos.y + this.size.y) {
+		   player.pos.y - 15 < this.pos.y + this.size.y + player.vel.y) {
 			player.vel.x = 0;
 			player.pos.x = this.pos.x + this.size.x + 15;
 		}
@@ -28,9 +28,9 @@ function Platform(x, y, w, h) {
 		if(player.pos.x + 15 > this.pos.x &&
 		   player.pos.x - 15 < this.pos.x + this.size.x &&
 		   player.pos.y - 15 < this.pos.y + this.size.y &&
-		   player.pos.y - 15 > this.pos.y + this.size.y - (this.size.y / 2)) {
+		   player.pos.y - 15 > this.pos.y + (this.size.y / 2)) {
 			player.vel.y = 0;
-			player.pos.y = this.pos.y + this.size.y + 15;
+			player.pos.y = this.pos.y + 15 + this.size.y;
 		}
 	}
 

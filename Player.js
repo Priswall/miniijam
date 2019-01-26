@@ -47,5 +47,5 @@ function Player(x, y) {
 var player = new Player(canvas.width / 2, canvas.height / 2);
 
 var script = document.createElement("script");
-script.src = "Platform.js";
+script.src = "NPC.js";
 document.body.appendChild(script);

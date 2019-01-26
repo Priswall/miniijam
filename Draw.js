@@ -27,7 +27,20 @@ function draw() {
 	}
 	else if(screen == "Intro") {
 		c.drawImage(cutscenes[currentCuscenePic], 0, 0, 1050, 600);
+		c.fillStyle = "rgba(100, 100, 100, 0.5)";
+		c.fillRect(canvas.width - 90, 10, 75, 25);
+		c.fillStyle = "white";
+		c.fillText("Skip cutscene", canvas.width - 52.5, 22.5);
 
+		if(mouse.x > canvas.width - 90 && mouse.x < canvas.width - 15 &&
+		   mouse.y > 10 && mouse.y < 35 &&
+	   	   transition.transitioningState == 0) {
+			canvas.style.cursor = "pointer";
+			if(mouseClicked) {
+				transition.transitioningState = 1;
+				transition.onhalfway = function() { screen = "Game" };
+			}
+		}
 		if(mouseClicked && transition.transitioningState == 0) {
 			transition.transitioningState = 1;
 			if(currentCuscenePic < 14) {
@@ -48,19 +61,10 @@ function draw() {
 
 		c.save();
 		c.translate(cam.x, cam.y);
-		player.draw();
 		player.update();
-
-		levels[currentLVL].platforms.forEach((platform) => {
-			platform.draw();
-			platform.update();
-			if(platform.id == "movingplatform") platform.move();
-		})
-
-		levels[currentLVL].monsters.forEach((monster) => {
-			monster.draw();
-			monster.update();
-		})
+		levels[currentLVL].update();
+		levels[currentLVL].draw();
+		player.draw();
 		c.restore();
 	}
 
