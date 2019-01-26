@@ -1,10 +1,43 @@
 function draw() {
 	frames++;
+	canvas.style.cursor = "default";
 
 	c.fillStyle = "rgb(255, 150, 150)";
 	c.fillRect(0, 0, canvas.width, canvas.height);
 
-	if(screen == "Game") {
+	if(screen == "Menu") {
+		c.fillStyle = "rgb(200, 255, 255)";
+		c.fillRect((canvas.width / 2) - 150, 300, 300, 100);
+		c.fillStyle = "white"
+		c.strokeStyle = "rgba(0, 0, 0, 0.2)";
+		c.lineWidth = 1;
+		c.font = "50px Arial";
+		c.textAlign = "center";
+		c.textBaseline = "middle";
+		c.fillText("P L A Y", canvas.width / 2, 350);
+		c.strokeText("P L A Y", canvas.width / 2, 350);
+		c.font = "10px Arial";
+		if(mouse.x > (canvas.width / 2) - 150 && mouse.x < (canvas.width / 2) + 150 && mouse.y > 300 && mouse.y < 400 && transition.transitioningState == 0) {
+			canvas.style.cursor = "pointer";
+			if(mouseClicked) {
+				transition.onhalfway = function() { screen = "Intro"; };
+				transition.transitioningState = 1;
+			}
+		}
+	}
+	else if(screen == "Intro") {
+		c.drawImage(cutscenes[currentCuscenePic], 0, 0, 1050, 600);
+
+		if(mouseClicked && transition.transitioningState == 0) {
+			transition.transitioningState = 1;
+			if(currentCuscenePic < 14) {
+				transition.onhalfway = function() { currentCuscenePic++; };
+			} else {
+				transition.onhalfway = function() { screen = "Game"; };
+			}
+		}
+	}
+	else if(screen == "Game") {
 		if(!levels[currentLVL].loaded) levels[currentLVL].load();
 		if(player.pos.x > levels[currentLVL].camXBounds.x &&
 		   player.pos.x < levels[currentLVL].camXBounds.y)
@@ -33,11 +66,15 @@ function draw() {
 
 	c.fillStyle = "white";
 	c.fillText((mouse.x - cam.x) + ", " + (mouse.y - cam.y), mouse.x, mouse.y - 10);
+	transition.transition();
+	mouseClicked = false;
 	requestAnimationFrame(draw);
 }
 
 addEventListener("keydown", (e) => { keys[e.keyCode] = true; });
 addEventListener("keyup", (e) => { keys[e.keyCode] = false; });
+addEventListener("mousedown", (e) => {mouseIsPressed = true; mouseClicked = true;});
+addEventListener("mouseup", (e) => {mouseIsPressed = false;});
 addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
 var element = document.getElementById("loading");

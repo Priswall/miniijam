@@ -18,7 +18,9 @@ levels.push(
         new Platform(400, -60, 900, 999),
         new singingPlatform(150, 200, 100, 20, 150, -25, "sin", 50)
     ],
-    [],
+    [
+        new Monster(0, -200, 0)
+    ],
     []
 ));
 

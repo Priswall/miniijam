@@ -17,11 +17,24 @@ function Sprite(img, x, y, w, h) {
 var keys = [];
 var mouse = new Vector(0, 0);
 var cam = new Vector(0, 0);
-var screen = "Game";
+var screen = "Menu";
 var frames = 0;
 var currentLVL = 0;
+var currentCuscenePic = 0;
 var levels = [];
+var cutscenes = [];
+var mouseClicked = false;
+var mouseIsPressed = false;
 
-var script = document.createElement("script");
-script.src = "Level.js";
-document.body.appendChild(script);
+for(var i = 1; i < 15; i++) {
+	cutscenes[i - 1] = new Image();
+	cutscenes[i - 1].src = "gfx/" + i + ".png";
+}
+
+cutscenes[14] = new Image();
+cutscenes[14].onload = function() {
+	var script = document.createElement("script");
+	script.src = "Transition.js";
+	document.body.appendChild(script);
+}
+cutscenes[14].src = "gfx/15.png";
