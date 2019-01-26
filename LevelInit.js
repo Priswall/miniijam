@@ -9,7 +9,7 @@ Monster(x, y, id)
 */
 levels.push(
     new Level(
-    new Vector(-130, 45),
+    new Vector(-350, 45),
     new Vector(0, 0),
     new Vector(0, 0),
     [
