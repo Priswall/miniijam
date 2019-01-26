@@ -1,6 +1,6 @@
 var canvas = document.createElement("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1050;
+canvas.height = 600;
 var c = canvas.getContext("2d");
 
 function Vector(x, y) {
@@ -19,8 +19,9 @@ var mouse = new Vector(0, 0);
 var cam = new Vector(0, 0);
 var screen = "Game";
 var frames = 0;
-var platforms = [];
+var currentLVL = 0;
+var levels = [];
 
 var script = document.createElement("script");
-script.src = "GameObject.js";
+script.src = "Level.js";
 document.body.appendChild(script);
