@@ -17,35 +17,35 @@ function movingPlatform(x, y, w, h, dx, dy, moveType) {
 	}
 
 	this.update = function() {
-		if(player.pos.x + 15 > this.pos.x &&
-		   player.pos.x + 15 < this.pos.x + (this.size.x / 2) &&
-		   player.pos.y + 15 > this.pos.y + player.vel.y &&
-		   player.pos.y - 15 < this.pos.y + this.size.y) {
+		if(player.pos.x + 35 > this.pos.x &&
+		   player.pos.x + 35 < this.pos.x + (this.size.x / 2) &&
+		   player.pos.y > this.pos.y + player.vel.y &&
+		   player.pos.y - 80 < this.pos.y + this.size.y) {
 			player.vel.x = 0;
-			player.pos.x = this.pos.x - 15;
+			player.pos.x = this.pos.x - 35;
 		}
-		if(player.pos.x - 15 > this.pos.x + this.size.x - (this.size.x / 2) &&
-		   player.pos.x - 15 < this.pos.x + this.size.x &&
-		   player.pos.y + 15 > this.pos.y + player.vel.y &&
-		   player.pos.y - 15 < this.pos.y + this.size.y) {
+		if(player.pos.x - 35 > this.pos.x + this.size.x - (this.size.x / 2) &&
+		   player.pos.x - 35 < this.pos.x + this.size.x &&
+		   player.pos.y > this.pos.y + player.vel.y &&
+		   player.pos.y - 80 < this.pos.y + this.size.y) {
 			player.vel.x = 0;
-			player.pos.x = this.pos.x + this.size.x + 15;
+			player.pos.x = this.pos.x + this.size.x + 35;
 		}
-		if(player.pos.x + 15 > this.pos.x &&
-		   player.pos.x - 15 < this.pos.x + this.size.x &&
-		   player.pos.y + 15 < this.pos.y + (this.size.y / 2) &&
-		   player.pos.y + 15 > this.pos.y) {
+		if(player.pos.x + 35 > this.pos.x &&
+		   player.pos.x - 35 < this.pos.x + this.size.x &&
+		   player.pos.y < this.pos.y + (this.size.y / 2) &&
+		   player.pos.y > this.pos.y) {
 			player.vel.y = 0;
-			player.pos.y = this.pos.y - 15;
+			player.pos.y = this.pos.y;
 			player.pos.x -= this.vel.x;
 			player.canJump = true;
 		}
-		if(player.pos.x + 15 > this.pos.x &&
-		   player.pos.x - 15 < this.pos.x + this.size.x &&
-		   player.pos.y - 15 < this.pos.y + this.size.y &&
-		   player.pos.y - 15 > this.pos.y + this.size.y - (this.size.y / 2)) {
+		if(player.pos.x + 35 > this.pos.x &&
+		   player.pos.x - 35 < this.pos.x + this.size.x &&
+		   player.pos.y - 80 < this.pos.y + this.size.y &&
+		   player.pos.y - 80 > this.pos.y + this.size.y - (this.size.y / 2)) {
 			player.vel.y = 0;
-			player.pos.y = this.pos.y + this.size.y + 15;
+			player.pos.y = this.pos.y + this.size.y + 80;
 		}
 	}
 

@@ -1,4 +1,4 @@
-function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs) {
+function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs, bgid) {
     this.spawn = spawn;
     this.camXBounds = new Vector(camLimitsX.x, camLimitsX.y);
     this.camYBounds = new Vector(camLimitsX.x, camLimitsY.y);
@@ -8,17 +8,22 @@ function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs) {
     this.platforms = platforms;
     this.monsters = monsters;
     this.npcs = npcs;
+    this.bgid = bgid;
+    this.canMoveX = true;
+    this.canMoveY = true;
+    if(camLimitsX.y == 0) this.canMoveX = false;
+    if(camLimitsY.y == 0) this.canMoveY = false;
     this.loaded = false;
 
     this.load = function() {
         player.pos.x = this.spawn.x;
         player.pos.y = this.spawn.y;
         player.vel = new Vector(0, 0);
-        if(this.camXBounds.x === 0 && this.camXBounds.y === 0)
+        if(!this.canMoveX)
             cam.x = canvas.width / 2;
         else
    		   cam.x = -player.pos.x + (canvas.width / 2);
-       if(this.camYBounds.x === 0 && this.camYBounds.y === 0)
+       if(!this.canMoveY)
            cam.y = canvas.height / 2;
        else
   		   cam.y = -player.pos.y + (canvas.height / 2);

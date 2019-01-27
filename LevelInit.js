@@ -17,44 +17,33 @@ levels.push(
     ],
     [],
     [
-        new NPC(-130, -30, "Use [D] or [>] to   move right")
-    ]
+        new NPC(-130, 0, "Use [D] or [>] to   move right")
+    ],
+    1
 ));
 levels.push(
     new Level(
     new Vector(-550, -115),
-    new Vector(0, 0),
+    new Vector(-100, 800),
     new Vector(0, 0),
     [
+        new Platform(-700, -70, 500, 700),
         new Platform(-700, -100, 700, 50),
-        new Platform(100, -700, 600, 750),
         new Platform(-100, 50, 800, 50),
-        new Platform(-700, -50, 500, 700),
+        new Platform(100, -700, 600, 770),
         new Platform(-200, 200, 800, 300),
+        new Platform(400, 50, 600, 50),
+        new Platform(200, -700, 600, 770),
+        new Platform(400, 200, 800, 300),
+        new Platform(1100, -70, 500, 700),
+        new Platform(900, -100, 700, 50)
     ],
     [],
     [
-        new NPC(-130, -130, "Use [A] or [<] to   move right")
-    ]
-));
-levels.push(
-    new Level(
-    new Vector(-550, 185),
-    new Vector(0, 0),
-    new Vector(0, 0),
-    [
-        new Platform(-50, -100, 700, 50),
-        new Platform(-100, -50, 50, 50),
-        new Platform(-800, -700, 600, 750),
-        new Platform(-600, 50, 550, 50),
-        new Platform(-50, 100, 50, 50),
-        new Platform(100, -50, 500, 700),
-        new Platform(-600, 200, 800, 300),
+        new NPC(-130, -100, "Use [A] or [<] to   move right"),
+        new NPC(-350, 200, "Use [W] or [^] to  move jump")
     ],
-    [],
-    [
-        new NPC(-350, 170, "Use [W] or [^] to   move jump")
-    ]
+    1
 ));
 levels.push(
     new Level(
@@ -69,8 +58,9 @@ levels.push(
     ],
     [],
     [
-        new NPC(-130, -30, "Try holding [SPACE] to use the amulet")
-    ]
+        new NPC(-130, 0, "Try holding [SPACE] to use the amulet")
+    ],
+    1
 ));
 
 var script = document.createElement("script");

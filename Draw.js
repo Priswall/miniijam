@@ -2,21 +2,9 @@ function draw() {
 	frames++;
 	canvas.style.cursor = "default";
 
-	c.fillStyle = "rgb(255, 150, 150)";
-	c.fillRect(0, 0, canvas.width, canvas.height);
-
 	if(screen == "Menu") {
-		c.fillStyle = "rgb(200, 255, 255)";
-		c.fillRect((canvas.width / 2) - 150, 300, 300, 100);
-		c.fillStyle = "white"
-		c.strokeStyle = "rgba(0, 0, 0, 0.2)";
-		c.lineWidth = 1;
-		c.font = "50px Arial";
-		c.textAlign = "center";
-		c.textBaseline = "middle";
-		c.fillText("P L A Y", canvas.width / 2, 350);
-		c.strokeText("P L A Y", canvas.width / 2, 350);
-		c.font = "10px Arial";
+		c.drawImage(titlescreen, 0, 0, 1050, 600);
+		c.drawImage(startButton, (canvas.width / 2) - 150, 300);
 		if(mouse.x > (canvas.width / 2) - 150 && mouse.x < (canvas.width / 2) + 150 && mouse.y > 300 && mouse.y < 400 && transition.transitioningState == 0) {
 			canvas.style.cursor = "pointer";
 			if(mouseClicked) {
@@ -26,6 +14,7 @@ function draw() {
 		}
 	}
 	else if(screen == "Intro") {
+		c.textAlign = "center";
 		c.drawImage(cutscenes[currentCuscenePic], 0, 0, 1050, 600);
 		c.fillStyle = "rgba(100, 100, 100, 0.5)";
 		c.fillRect(canvas.width - 90, 10, 75, 25);
@@ -51,13 +40,21 @@ function draw() {
 		}
 	}
 	else if(screen == "Game") {
+		c.drawImage(backgrounds[levels[currentLVL].bgid], 0, 0, 1050, 600);
+
 		if(!levels[currentLVL].loaded) levels[currentLVL].load();
-		if(player.pos.x > levels[currentLVL].camXBounds.x &&
-		   player.pos.x < levels[currentLVL].camXBounds.y)
+		if(levels[currentLVL].canMoveX)
 	   		cam.x = -player.pos.x + (canvas.width / 2);
-		if(player.pos.y > levels[currentLVL].camYBounds.x &&
-		   player.pos.y < levels[currentLVL].camYBounds.y)
+		if(levels[currentLVL].canMoveY)
 	   		cam.y = -player.pos.y + (canvas.height / 2);
+		if(-cam.x < levels[currentLVL].camXBounds.x - (canvas.width / 2))
+			cam.x = -(levels[currentLVL].camXBounds.x - (canvas.width / 2));
+		if(-cam.x > levels[currentLVL].camXBounds.y - (canvas.width / 2))
+			cam.x = -(levels[currentLVL].camXBounds.y - (canvas.width / 2));
+		if(-cam.y < levels[currentLVL].camYBounds.x - (canvas.height / 2))
+			cam.y = -(levels[currentLVL].camYBounds.x - (canvas.height / 2));
+		if(-cam.y > levels[currentLVL].camYBounds.y - (canvas.height / 2))
+			cam.y = -(levels[currentLVL].camYBounds.y - (canvas.height / 2));
 
 		c.save();
 		c.translate(cam.x, cam.y);
