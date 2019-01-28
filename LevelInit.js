@@ -41,7 +41,7 @@ levels.push(
     [],
     [
         new NPC(-130, -100, "Use [A] or [<] to   move right"),
-        new NPC(-350, 200, "Use [W] or [^] to  move jump")
+        new NPC(350, 200, "Use [W] or [^] to   jump")
     ],
     1
 ));
@@ -58,7 +58,7 @@ levels.push(
     ],
     [],
     [
-        new NPC(-130, 0, "Try holding [SPACE] to use the amulet")
+        new NPC(-130, 0, "Try holding         [SPACE]")
     ],
     1
 ));

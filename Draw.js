@@ -19,7 +19,10 @@ function draw() {
 		c.fillStyle = "rgba(100, 100, 100, 0.5)";
 		c.fillRect(canvas.width - 90, 10, 75, 25);
 		c.fillStyle = "white";
+		c.font = "10px Arial";
 		c.fillText("Skip cutscene", canvas.width - 52.5, 22.5);
+		c.font = "20px Arial";
+		c.fillText(cutSceneText[currentCuscenePic], canvas.width / 2, canvas.height - 40);
 
 		if(mouse.x > canvas.width - 90 && mouse.x < canvas.width - 15 &&
 		   mouse.y > 10 && mouse.y < 35 &&
@@ -32,7 +35,7 @@ function draw() {
 		}
 		if(mouseClicked && transition.transitioningState == 0) {
 			transition.transitioningState = 1;
-			if(currentCuscenePic < 14) {
+			if(currentCuscenePic < 13) {
 				transition.onhalfway = function() { currentCuscenePic++; };
 			} else {
 				transition.onhalfway = function() { screen = "Game"; };
@@ -40,6 +43,7 @@ function draw() {
 		}
 	}
 	else if(screen == "Game") {
+		if(lost.currentTime == 0) lost.play();
 		c.drawImage(backgrounds[levels[currentLVL].bgid], 0, 0, 1050, 600);
 
 		if(!levels[currentLVL].loaded) levels[currentLVL].load();
@@ -58,12 +62,15 @@ function draw() {
 
 		c.save();
 		c.translate(cam.x, cam.y);
-		player.update();
+		if(!player.iscrying) player.update();
 		levels[currentLVL].update();
 		levels[currentLVL].draw();
 		player.draw();
 		c.restore();
-	}
+	} else if(screen == "Ending")
+
+	c.fillText("ClockbeatAdelony87 - Lost", 0, 0);
+	c.fillText("etK - Sikirz", 0, 0);
 
 	c.fillStyle = "white";
 	c.fillText((mouse.x - cam.x) + ", " + (mouse.y - cam.y), mouse.x, mouse.y - 10);

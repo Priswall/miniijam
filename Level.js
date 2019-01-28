@@ -6,7 +6,7 @@ function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs, bgid) {
     this.ogmonsters = monsters;
     this.ognpcs = npcs;
     this.platforms = platforms;
-    this.monsters = monsters;
+    this.monsters = [];
     this.npcs = npcs;
     this.bgid = bgid;
     this.canMoveX = true;
@@ -27,9 +27,10 @@ function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs, bgid) {
            cam.y = canvas.height / 2;
        else
   		   cam.y = -player.pos.y + (canvas.height / 2);
-        this.platforms = this.ogplatforms;
-        this.monsters = this.ogmonsters;
-        this.npcs = this.ognpcs;
+        this.monsters = [];
+        for(var i = 0; i < this.ogmonsters.length; i++) {
+            this.monsters.push(new Monster(this.ogmonsters[i].pos.x, this.ogmonsters[i].pos.y, this.ogmonsters[i].id));
+        }
         this.loaded = true;
     };
 
@@ -44,7 +45,6 @@ function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs, bgid) {
             if(platform.id == "movingplatform") platform.move();
         });
         this.monsters.forEach((monster) => { monster.update(); });
-        this.npcs.forEach((npc) => { npc.update(); });
         if(player.pos.x - 15 > this.camXBounds.y + (canvas.width / 2)) {
             transition.transitioningState = 1;
             if(currentLVL < levels.length - 1)
@@ -62,6 +62,7 @@ function Level(spawn, camLimitsX, camLimitsY, platforms, monsters, npcs, bgid) {
     this.draw = function() {
         this.platforms.forEach((platform) => { platform.draw(); });
         this.monsters.forEach((monster) => { monster.draw(); });
+        this.npcs.forEach((npc) => { npc.update(); });
         this.npcs.forEach((npc) => { npc.draw(); });
     }
 }

@@ -22,7 +22,7 @@ function NPC(x, y, text) {
             if(this.a > 0) this.a -= 5;
         }
         c.fillStyle = "rgba(0, 0, 0, " + this.a / 500 + ")";
-        c.fillRect(this.pos.x - 160, this.pos.y - (145 + (15 * this.text.length)), c.measureText(this.text[0]).width * 2.5 + 10, (30 + (15 * this.text.length)));
+        c.fillRect(this.pos.x - 160, this.pos.y - (145 + (15 * this.text.length)), 210, (30 + (15 * this.text.length)));
         c.fillStyle = "rgba(255, 255, 255, " + this.a / 100 + ")";
         c.font = "25px Arial";
         c.textAlign = "left";

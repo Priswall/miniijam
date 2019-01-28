@@ -3,6 +3,7 @@ function Player(x, y) {
 	this.vel = new Vector(0, 0);
 	this.acc = 0.2;
 	this.isSinging = false;
+	this.isCrying = false;
 	this.canJump = false;
 
 	this.update = function() {
@@ -17,8 +18,15 @@ function Player(x, y) {
 			if(this.canJump) this.vel.y = -5.75;
 			this.canJump = false;
 		}
-		if(keys[32] || keys[13]) this.isSinging = true;
-		else this.isSinging = false;
+		if(keys[32] || keys[13]) {
+			this.isSinging = true;
+			singing.play();
+		}
+		else {
+			this.isSinging = false;
+			singing.pause();
+			singing.currentTime = 0.1;
+		}
 
 		if(left) this.vel.x -= this.acc;
 		if(right) this.vel.x += this.acc;
@@ -44,10 +52,12 @@ function Player(x, y) {
 			c.scale(-1, 1);
 		}
 		else c.translate(this.pos.x - 45, this.pos.y - 95);
-		if(this.isSinging)
+		if(this.isSinging && !this.iscrying)
 			c.drawImage(owo2, 0, Math.sin(frames / 30) * 3, 90, 90);
-		else
+		else if(!this.isSinging && !this.iscrying)
 			c.drawImage(owo, 0, Math.sin(frames / 30) * 3, 90, 90);
+		else
+			c.drawImage(owocrying, 0, Math.sin(frames / 30) * 3, 90, 90);
 		c.restore();
 		c.save();
 		if(this.vel.x > 0) c.translate(this.pos.x - 15, this.pos.y - (40 - (Math.sin(frames / 30) * 3)));
